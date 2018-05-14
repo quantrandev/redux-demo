@@ -1,15 +1,18 @@
-import { INCREMENT, DECREMENT } from './actions';
+import {
+  IProductState,
+  productReducer,
+  PRODUCT_INITIAL_STATE
+} from './product/store';
+import { combineReducers } from 'redux';
 
 export interface IAppState {
-  counter: number;
+  product: IProductState;
 }
 
-export function rootReducer(state: IAppState, action: any): IAppState {
-  switch (action.type) {
-    case INCREMENT:
-      return { counter: state.counter + 1 };
-    case DECREMENT:
-      return { counter: state.counter - 1 };
-  }
-  return state;
-}
+export const INITIAL_STATE: IAppState = {
+  product: PRODUCT_INITIAL_STATE
+};
+
+export const rootReducer = combineReducers({
+  product: productReducer
+});
